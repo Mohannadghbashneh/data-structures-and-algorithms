@@ -18,8 +18,15 @@ Becomes:
 ]
 ------------------------------------------------------------------------------------------------ */
 
-function transformToLis(obj){
+function transformToLis(obj) {
   // Solution code here...
+  let newArr = [];
+  let k = Object.keys(obj);
+  let v = Object.values(obj);
+  for (let i = 0; i < k.length; i++) {
+    newArr.push(`<li>${k[i]}: ${v[i]}</li>`);
+  }
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -34,6 +41,16 @@ For example, count(5, [[1, 3, 5, 7, 9], [5, 5, 5], [1, 2, 3]]) returns 4.
 
 const count = (target, input) => {
   // Solution code here...
+  let count = 0;
+  if (input.length > 0) {
+    input.map(arr => {
+      arr.map(num => {
+        if (num === target)
+          count++;
+      });
+    });
+  }
+  return count;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -48,6 +65,9 @@ For example, [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]] returns 66.
 
 const totalSum = (input) => {
   // Solution code here...
+  let sum = 0;
+  input.map(val => val.map(v => sum += v));
+  return sum;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -64,8 +84,17 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 
 const divisibleByFiveTwoToThePower = (input) => {
   // Solution code here...
+  const onlyNumbers = [];
+  let newArray = [];
+  input.forEach(arr => {
+    onlyNumbers.push(arr.filter(word =>
+      typeof word === 'number' && word % 5 === 0));
+  });
+  onlyNumbers.map(arr => {
+    newArray.push(arr.map(number => Math.pow(2, number)));
+  });
+  return newArray;
 };
-
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 
@@ -130,8 +159,14 @@ let starWarsData = [{
 
 let findMaleAndFemale = (data) => {
   // Solution code here...
+  let gendersArray = [];
+  data.forEach((item) => {
+    if(item.gender === 'male' || item.gender === 'female') {
+      gendersArray.push(item.name);
+    }
+  });
+  return gendersArray.join(' and ');
 };
-
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
 
@@ -140,8 +175,14 @@ Write a function named findShortest that, given the Star Wars data from Challeng
 
 let findShortest = (data) => {
   // Solution code here...
+  let ch = data.reduce((a, b) => {
+    if (parseInt(a.height) < parseInt(b.height)) {
+      return a;
+    }
+    return b;
+  });
+  return ch.name;
 };
-
 /* ------------------------------------------------------------------------------------------------
 TESTS
 
