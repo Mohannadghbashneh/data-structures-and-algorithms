@@ -56,7 +56,7 @@ const hasNumber = (string) => {
   return regex1.test(string) ? regex2.test(string) : false;
 
 };
-
+/////////////////////////
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 
